@@ -19,7 +19,7 @@ Tehtävän tekoon käytin kotonani olevaa pc:tä:
 
 Virtuaalinen kone Virtualboxin kautta johon asennettuna Debian 12 Bookworm.
 ## X) Tiivistelmä
-- ` `Saltin avulla voi paikallisesti hallita suurta määrää tietokoneita verkon yli. Yleensä järjestelmä koostuu yhdestä master-palvelimesta ja useista minion-palvelimista.
+- Saltin avulla voi paikallisesti hallita suurta määrää tietokoneita verkon yli. Yleensä järjestelmä koostuu yhdestä master-palvelimesta ja useista minion-palvelimista.
 - Tärkeitä Salt-toimintoja: pkg (sovellusten asennus/poisto), file (tiedostojen hallinta), service (palveluiden hallinta), user (käyttäjien hallinta), cmd (komentojen suorittaminen)
 - Raportissa täytyy mainita tarkat toimeenpiteet, komennot ja ympäristö. Raportin kuuluu olla helppolukuinen ja pitää muistaa viittaa kaikkiin lähteisiin.
 
@@ -34,7 +34,8 @@ Sain Saltin minionin asennettua käyttäen seuraavia komentoja:
 Tämän jälkeen tarkistin asennuksen komennolla:
 
 - sudo salt-call –version
-
+  
+![Add file: Upload](kuvat/kuva1.png)
 
 
 ## C) Tärkeät komennot
@@ -48,11 +49,16 @@ sudo salt-call --local -l info state.single pkg.installed tree
 
 Tämä asensi tree paketin
 
+
+![Add file: Upload](kuvat/kuva2.png)
+
 ja komennolla: 
 
 sudo salt-call --local -l info state.single pkg.removed tree
 
 sain poistettua tree paketin. 
+
+![Add file: Upload](kuvat/kuva3.png)
 
 - **file**
 
@@ -62,6 +68,8 @@ sudo salt-call --local -l info state.single file.managed /home/mire/test content
 
 Tämä loi tiedoston /home/mire/test ja kirjoitti siihen Hello, Salt! 
 
+![Add file: Upload](kuvat/kuva5.png)
+
 
 - **service**
 
@@ -69,15 +77,21 @@ Service komentoa kokeilin service.runnning komennolla:
 
 sudo salt-call --local -l info state.single service.running name=apache2 enable=True
 
+![Add file: Upload](kuvat/kuva6.png)
+
 tämä käynnisti apache2 palvelun ja varmistaa että palvelu käynnistyy automaattisesti, ja päin vastoin service.dead lopettaa palvelun ja estää automaattisen käynnistyksen komennolla:
 
 ` `sudo salt-call --local -l info state.single service.dead name=apache2 enable=True
+
+![Add file: Upload](kuvat/kuva7.png)
 
 - **user**
 
 loin uuden käyttäjän käyttäen komentoa: 
 
 sudo salt-call --local -l info state.single user.present testuser
+
+![Add file: Upload](kuvat/kuva8.png)
 
 - **cmd**
 
@@ -87,6 +101,10 @@ sudo salt-call --local -l info state.single cmd.run 'touch /home/mire/test2’ c
 
 tässä komennossa ‘touch /home/mire/test2’ loi tiedoston ’creates’ komennon tuloksen perusteella, eli creates tarkistaa tiedoston olemassaolon ennen touch komennon suorittamista.  
 
+
+![Add file: Upload](kuvat/kuva9.png)
+
+
 ## D) Idempotenssi
 
 esimerkiksi valitsin komennon:
@@ -95,7 +113,12 @@ sudo salt-call -local -I info state.single pkg.installed tree
 
 suoritettuani tämän kerran asensi tree paketin, kun suoritin tämän uudestaan saavutin idempotenssi tilan sillä ei tule muutoksia koska paketti on jo asennettu. 
 
-## E) Herra-orja arkkiteehtuuri
+![Add file: Upload](kuvat/kuva10.png)
+
+![Add file: Upload](kuvat/kuva11.png)
+
+
+## E) Herra-orja arkkitehtuuri
 kello: 11:20 aikaa kului noin 10 minuuttia
 
 Salt-minion oli jo asennettuna joten asensin salt-masterin komennolla:
@@ -117,6 +140,8 @@ sudo salt-key -a my-minion
 Jonka jälkeen kokeilin yhteyttä onnistuneesti komennolla:
 
 sudo salt '\*' cmd.run 'whoami'
+
+![Add file: Upload](kuvat/kuva12.png)
 
 ## Viiteet ja lähteet: 
 <https://terokarvinen.com/palvelinten-hallinta/>
