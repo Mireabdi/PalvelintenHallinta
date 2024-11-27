@@ -1,7 +1,7 @@
-# Palvelinten Hallinta  
+# Palvelinten Hallinta
 **ICI001AS3A-3010**  
 **Abdirahman Mire**  
-**My-Module**  
+**My Module: Apache**  
 
 
 ## Työympäristö  
@@ -14,8 +14,8 @@ Tehtävän toteutin omalla työasemallani:
 
 
 ## Tiivistelmä  
-Tässä raportissa esittelen SaltStack-moduulin, joka automatisoi useiden verkkosovellusten, kuten WordPressin, Nextcloudin ja GitLabin, asennuksen ja hallinnan. Moduuli tukee useita ominaisuuksia, kuten monikäyttäjäympäristöjä, idempotenttiutta, turvallisuuden konfigurointia ja SSL-sertifikaattien hallintaa. Tavoitteena on luoda infrastruktuuri, joka on helposti laajennettavissa ja jota voidaan hallita yhdellä koodikokonaisuudella.
 
+Tässä raportissa luodaan SaltStack-moduuli, joka automatisoi Apache2-web-palvelimen asennuksen ja konfiguroinnin. Moduuli hallitsee Apache2:n asennusta, VirtualHost-konfiguraation luomista ja mukautetun index.html-sivun kopioimista palvelimelle. Moduuli takaa idempotenssin, eli ympäristön pysyvyyden toistuvilla ajokerroilla. Tavoitteena on oppia SaltStackin perusteet ja luoda toistettavissa oleva ympäristö, joka voidaan laajentaa tulevaisuudessa lisätoiminnoilla.
 
 ### A) Apache-moduulin luominen  
  
@@ -27,15 +27,21 @@ Tähän ensin loin top.sls tiedoston joka ohjaa mitä tiloja sovelletaan mihinki
 
 ![kuva1](kuvat/kuva1.PNG)
 
-Seuraavaksi loin init.sls tiedoston johon lisäsin kaikken tarvittavan Apache-palvelimen asentamiseksi ja konfiguroimiseksi.
+Loin init.sls tiedoston johon lisäsin kaikken tarvittavan Apache-palvelimen asentamiseksi ja konfiguroimiseksi. 
+
+`sudoedit init.sls`
 
 ![kuva2](kuvat/kuva2.PNG)
 
 Seuraavaksi Loin apache.conf.jinja tiedoston joka on VirtualHost-konfiguraatiotiedosto apachelle. Tämä määrittää palvelimen juurihakemiston ja lokitiedostojen sijainnit.
 
+ `sudoedit apache.conf.jinja`
+
 ![kuva3](kuvat/kuva3.PNG)
 
 Tämän luotuani vuorossa oli index.html.jinja tiedosto, joka näkyy Apache-palvelimen etusivulla.
+
+`sudoedit index.html.jinja`
 
 ![kuva4](kuvat/kuva4.PNG)
 
@@ -46,14 +52,17 @@ Kun sain nämä Apache määritykset tehtyä, ajoin init.sls tiedoston paikallis
 
 ![kuva6](kuvat/kuva6.PNG)
 
-neljästä vain kolme changed koska Apache oli jo asennettuna.
+Neljästä vain kolme changed koska Apache oli jo asennettuna.
 
 
-lopuksi ajoin komennon `sudo salt '*' state.apply` masterilla kahdesti saavuttaakseni idempotenssin.
+Lopuksi ajoin komennon `sudo salt '*' state.apply` masterilla kahdesti saavuttaakseni idempotenssin.
 
 ![kuva7](kuvat/kuva7.PNG)
 
 ![kuva8](kuvat/kuva8.PNG)
 
+Kokeilin vielä verkkosivua selaimella:
+
+![kuva9](kuvat/kuva9.PNG)
 
 
