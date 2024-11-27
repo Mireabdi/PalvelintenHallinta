@@ -15,7 +15,7 @@ Tehtävän toteutin omalla työasemallani:
 
 ## Tiivistelmä  
 
-Tässä raportissa luodaan SaltStack-moduuli, joka automatisoi Apache2-web-palvelimen asennuksen ja konfiguroinnin. Moduuli hallitsee Apache2:n asennusta, VirtualHost-konfiguraation luomista ja mukautetun index.html-sivun kopioimista palvelimelle. Moduuli takaa idempotenssin, eli ympäristön pysyvyyden toistuvilla ajokerroilla.
+Tässä raportissa luodaan SaltStack-moduuli, joka automatisoi Apache2-web-palvelimen asennuksen ja konfiguroinnin. Moduuli hallitsee Apache2:n asennusta, VirtualHost-konfiguraation luomista ja mukautetun index.html-sivun kopioimista palvelimelle. Moduuli takaa idempotenssin, eli ympäristön pysyvyyden toistuvilla ajokerroilla. Haluan vielä mahdollisesti lisätä wordpressin, gitlabin ja nextcloudin, jolloin tästä tulisi isompi kokonaisuus.
 
 ### A) Apache-moduulin luominen  
  
